@@ -4,7 +4,7 @@ import logging
 
 from app.utils.logger import configure_logging
 from app.ingestion.vectorstore import ChromaVectorStore
-from app.bot.llm_engine import OllamaAnswerGenerator
+from app.llm_engine import OllamaAnswerGenerator
 from pydantic import BaseModel
 
 configure_logging()

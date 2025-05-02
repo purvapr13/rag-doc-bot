@@ -11,3 +11,4 @@ python-pptx
 chromadb
 sentence-transformers
 requests
+gradio
