@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Body
+import asyncio
 import uvicorn
 import logging
 
@@ -31,12 +32,12 @@ def home():
 
 
 @app.post("/predict")
-def predict(request: QuestionRequest = Body(...)):
+async def predict(request: QuestionRequest = Body(...)):
     try:
         ques = request.ques
         logger.info(f"Received question: {ques}")
 
-        top_docs = vector_store.similarity_search(ques, k=4)
+        top_docs = vector_store.similarity_search(ques, k=2)
         context = "\n\n".join([doc.page_content for doc in top_docs])
 
         logger.info("Generating answer using Ollama...")
