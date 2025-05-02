@@ -10,3 +10,4 @@ python-magic
 python-pptx
 chromadb
 sentence-transformers
+requests
