@@ -4,11 +4,13 @@ langchain
 langchain_community
 langchain-huggingface
 langchain-chroma
-unstructured
-pymupdf
+unstructured[all-docs]
+pdfminer.six
+pi_heif
 python-magic
 python-pptx
 chromadb
 sentence-transformers
 requests
-gradio
+streamlit
+simsimid

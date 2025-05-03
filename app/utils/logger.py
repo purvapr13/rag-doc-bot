@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 def configure_logging():
     # Configure root logger once
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
 
     if not logger.handlers:
         formatter = logging.Formatter(
