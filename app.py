@@ -1,54 +1,45 @@
 from fastapi import FastAPI, Body
-import asyncio
 import uvicorn
 import logging
-
-from app.utils.logger import configure_logging
-from app.ingestion.vectorstore import ChromaVectorStore
-from app.llm_engine import OllamaAnswerGenerator
 from pydantic import BaseModel
+import os
+
+# Import custom logger and other components
+from app.utils.logger import configure_logging
+from app.retrieval import LangChainRetrievalQA, ChromaVectorStore
 
 configure_logging()
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# Initialize vector store & Ollama generator
-vector_store = ChromaVectorStore(
-    persist_directory="chroma_db",
-    local_model_path="app/models/all-MiniLM-L6-v2"
-)
+# Resolve paths for the Chroma DB and models from the app directory
+current_dir = os.path.dirname((os.path.abspath(__file__)))
+print(current_dir)
+model_path = os.path.join(current_dir, "app", "models", "all-MiniLM-L6-v2")
+chroma_db_path = os.path.join(current_dir, "app", "chroma_db")
 
-llm = OllamaAnswerGenerator(model_name="mistral")
+# Initialize the vector store and QA system
+vector_store = ChromaVectorStore(persist_directory=chroma_db_path, local_model_path=model_path)
+qa_system = LangChainRetrievalQA(vector_store)
 
 
+# Define the request model
 class QuestionRequest(BaseModel):
     ques: str
 
 
-@app.get("/")
-def home():
-    return {"message": "RAG chatbot is running. Use POST /predict with JSON body: {'ques': 'your question'}"}
-
-
+# Define the FastAPI POST endpoint
 @app.post("/predict")
 async def predict(request: QuestionRequest = Body(...)):
     try:
-        ques = request.ques
-        logger.info(f"Received question: {ques}")
-
-        top_docs = vector_store.similarity_search(ques, k=2)
-        context = "\n\n".join([doc.page_content for doc in top_docs])
-
-        logger.info("Generating answer using Ollama...")
-        answer = llm.generate(context=context, question=ques)
-
-        return {"question": ques, "answer": answer}
-
+        question = request.ques
+        logger.info(f"Received question: {question}")
+        answer = qa_system.get_answer(question)
+        return {"question": question, "answer": answer}
     except Exception as e:
         logger.error(f"Error: {str(e)}")
-        return {"error": "Sorry, could not process your request."}
-
+        return {"error": "Unable to process your request."}
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

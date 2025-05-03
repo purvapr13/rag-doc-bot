@@ -9,6 +9,7 @@ pymupdf
 python-magic
 python-pptx
 chromadb
+langchain-chroma>=0.1.2
 sentence-transformers
 requests
 streamlit

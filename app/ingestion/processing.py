@@ -4,8 +4,11 @@ from app.ingestion.vectorstore import ChromaVectorStore
 import logging
 import os
 
+
+model_path = os.path.abspath("../../app/models/all-MiniLM-L6-v2")
+
 # Initialize Chroma VectorStore
-vector_store = ChromaVectorStore(persist_directory="chroma_db", local_model_path="../../app/models/all-MiniLM-L6-v2")
+vector_store = ChromaVectorStore(persist_directory="../chroma_db", local_model_path=model_path)
 
 # Logger setup
 logger = logging.getLogger(__name__)
@@ -31,6 +34,9 @@ def process_and_store_document(file_path):
         vector_store.add_documents(chunks)
 
         logger.info(f"Successfully processed and stored document: {file_path}")
+        print("Document count in DB:",
+              vector_store.db._collection.count())  # or vector_store.db._collection.count_documents()
+
 
     except Exception as e:
         logger.error(f"Error processing {file_path}: {str(e)}")
