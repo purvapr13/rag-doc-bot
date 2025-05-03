@@ -5,8 +5,7 @@ langchain_community
 langchain-huggingface
 langchain-chroma
 unstructured[all-docs]
-pdfminer.six
-pi_heif
+pymupdf
 python-magic
 python-pptx
 chromadb
