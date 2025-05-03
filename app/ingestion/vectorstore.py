@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class ChromaVectorStore:
-    def __init__(self, persist_directory="chroma_db", local_model_path="../models/all-MiniLM-L6-v2"):
+    def __init__(self, persist_directory="../chroma_db", local_model_path="../models/all-MiniLM-L6-v2"):
         self.persist_directory = persist_directory
 
         logger.debug('Initialize embedding model')
@@ -27,5 +27,8 @@ class ChromaVectorStore:
 
     def similarity_search(self, query, k=5):
         return self.db.similarity_search(query, k=k)
+
+    def as_retriever(self):
+        return self.db.as_retriever()
 
 
