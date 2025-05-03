@@ -18,6 +18,8 @@ class OllamaAnswerGenerator:
 Context:
 {context}
 
+Answer the following question strictly based on the context. Do not invent any information.
+
 Question: {question}
 Answer:"""
 
