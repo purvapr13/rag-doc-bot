@@ -73,7 +73,7 @@
 You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model and place it in the following directory:
 
 
-
+## Usage
 ## Running the Application
 
 1. From the app folder run python main.py to start the application locally on port 8000:
