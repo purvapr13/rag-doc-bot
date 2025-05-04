@@ -22,10 +22,7 @@
 - [Cache and Retrieval](#cache-and-retrieval)
 - [Contributing](#contributing)
 - [License](#license)
-
----
-
-**RAG-Doc-Bot** is designed to help organizations and individuals retrieve answers from a collection of documents using advanced document search and AI-based question answering. Using **ChromaDB** as a vector store and **Hugging Face's MiniLM model**, the bot performs efficient text search and integrates external knowledge sources (using models like **Ollama**) to provide accurate and contextual answers.
+  
 
 ---
 
@@ -43,11 +40,10 @@
 
 - **Backend**: FastAPI
 - **Vector Database**: ChromaDB
-- **Document Embedding**: Hugging Face's MiniLM (all-MiniLM-L6-v2 model)
+- **Document Embedding**: Hugging Face's Open Source MiniLM (all-MiniLM-L6-v2 model)
 - **Retrieval**: LangChain
-- **Language Model for Generation**: Ollama (or any other LLM)
+- **Language Model for Generation**: Mistral from Ollama (Open Source)
 - **Containerization**: Docker
-- **Task Queue (for heavy processing)**: Threading and asyncio
 - **Cache**: Cachetools (for caching answers)
 
 ---
