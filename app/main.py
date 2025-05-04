@@ -5,8 +5,8 @@ from pydantic import BaseModel
 import os
 
 # Import custom logger and other components
-from app.utils.logger import configure_logging
-from app.retrieval import LangChainRetrievalQA, ChromaVectorStore
+from utils.logger import configure_logging
+from retrieval import LangChainRetrievalQA, ChromaVectorStore
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -15,9 +15,8 @@ app = FastAPI()
 
 # Resolve paths for the Chroma DB and models from the app directory
 current_dir = os.path.dirname((os.path.abspath(__file__)))
-print(current_dir)
-model_path = os.path.join(current_dir, "app", "models", "all-MiniLM-L6-v2")
-chroma_db_path = os.path.join(current_dir, "app", "chroma_db")
+model_path = os.path.join(current_dir, "models", "all-MiniLM-L6-v2")
+chroma_db_path = os.path.join(current_dir, "chroma_db")
 
 # Initialize the vector store and QA system
 vector_store = ChromaVectorStore(persist_directory=chroma_db_path, local_model_path=model_path)

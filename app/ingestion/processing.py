@@ -37,7 +37,6 @@ def process_and_store_document(file_path):
         print("Document count in DB:",
               vector_store.db._collection.count())  # or vector_store.db._collection.count_documents()
 
-
     except Exception as e:
         logger.error(f"Error processing {file_path}: {str(e)}")
         raise e

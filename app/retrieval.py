@@ -3,7 +3,8 @@ import os
 import requests
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from app.utils.logger import configure_logging
+from utils.logger import configure_logging
+from utils.cache import get_cached_answer, store_answer_in_cache
 
 configure_logging()
 logger = logging.getLogger(__name__)
@@ -80,6 +81,11 @@ class LangChainRetrievalQA:
         return self.ollama_answer_generator.generate(context=context, question=question)
 
     def get_answer(self, question: str) -> str:
+        cached_answer = get_cached_answer(question)
+        if cached_answer:
+            logger.info(f"Cache hit for question: {question}")
+            return cached_answer
+
         retriever = self._create_retriever()
         documents = retriever.invoke(question)
 
@@ -88,7 +94,9 @@ class LangChainRetrievalQA:
             return "⚠️ Sorry, I couldn't find relevant information in the documents."
 
         context = "\n\n".join([doc.page_content for doc in documents])
-        return self._generate_answer(context=context, question=question)
+        answer = self._generate_answer(context=context, question=question)
+        store_answer_in_cache(question, answer)
+        return answer
 
 
 # Initialize Chroma vector store
