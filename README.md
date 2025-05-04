@@ -59,7 +59,7 @@
 1. **Clone the repository**:
 
    ```bash
-   git clone [https://github.com/purvapr13/rag-doc-bot.git]
+   git clone https://github.com/purvapr13/rag-doc-bot.git
    cd rag-doc-bot
 
 2. **Install Dependencies**:
