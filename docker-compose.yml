@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  rag-doc-bot:
+    build:
+      context: .  # Use the current directory for building the Docker image
+      dockerfile: Dockerfile  # Specify the Dockerfile to use
+    container_name: rag-doc-bot-container
+    ports:
+      - "8000:8000"  # Expose FastAPI on port 8000
+    volumes:
+      - ./app/models:/rag_bot/app/models  # Mount the models directory
+      - ./app/chroma_db:/rag_bot/app/chroma_db  # Mount the chroma_db directory
+    environment:
+      - ENV=develop
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]  # Start FastAPI app
+    restart: unless-stopped
