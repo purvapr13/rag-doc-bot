@@ -13,7 +13,6 @@
 - [Setup](#setup)
   - [Requirements](#requirements)
   - [Installation](#installation)
-  - [Configuration](#configuration)
 - [Usage](#usage)
   - [Running the Application](#running-the-application)
   - [Testing](#testing)
