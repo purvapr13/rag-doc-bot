@@ -18,9 +18,7 @@
   - [Running the Application](#running-the-application)
   - [Testing](#testing)
   - [Docker](#docker)
-  - [API Endpoints](#api-endpoints)
 - [Cache and Retrieval](#cache-and-retrieval)
-- [Contributing](#contributing)
 - [License](#license)
   
 
@@ -56,7 +54,7 @@
 - Docker (optional for containerization)
 - CUDA-enabled GPU (optional for Hugging Face model acceleration)
 
-### Installation
+### Local Installation
 
 1. **Clone the repository**:
 
@@ -70,15 +68,21 @@
     pip install -r requirements.txt
   ✅ If you're using CUDA, make sure to install PyTorch with GPU support
 
-3. **Download the model outside docker if using docker, in local also create models/all-MiniLM-L6-v2/ folder in app directory**:
-   To keep the Docker image lightweight, the Hugging Face model is not included in the image and not in repo.
-   Manually download the all-MiniLM-L6-v2 model and place it inside:
-    
+3. **📁 Create the `models/all-MiniLM-L6-v2/` folder manually inside the `app/` directory if it doesn't already exist.**
+
+You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model and place it in the following directory:
+
+
 
 ## Running the Application
 
-1. From the app folder run python main.py to start the application locally on port 8000
-2. To start streamlit UI, open another terminal and run: streamlit run .\streamlit_app.py
+1. From the app folder run python main.py to start the application locally on port 8000:
+     ```bash
+        python main.py
+
+2. To start streamlit UI, open another terminal and run: 
+     ```bash
+      streamlit run .\streamlit_app.py
 It will start the streamlit UI as below, where you can ask questions.
 
 <img width="587" alt="image" src="https://github.com/user-attachments/assets/7d12c6b5-4ed3-44f8-b4c6-3b70d5c6216d" />
@@ -125,6 +129,10 @@ This app uses an **in-memory cache** (via [`cachetools`](https://pypi.org/projec
 - 🧠 **Caches only successfully answered questions**
 - ⚡ **Speeds up repeat queries significantly**
 - 🔒 **Thread-safe and memory-efficient**
+
+
+
+
 
 
 
