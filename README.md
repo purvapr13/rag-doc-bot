@@ -110,7 +110,7 @@ It will start the streamlit UI as below, where you can ask questions.
 
 ## Testing
 
-Run automated tests using **pytest**:
+Run unit tests using **pytest**:
 
 pytest app/tests
 
