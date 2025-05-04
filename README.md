@@ -53,7 +53,7 @@
 ### Requirements
 
 - Python >= 3.8
-- Docker (for containerization)
+- Docker (optional for containerization)
 - CUDA-enabled GPU (optional for Hugging Face model acceleration)
 
 ### Installation
@@ -64,8 +64,68 @@
    git clone https://github.com/yourusername/rag-doc-bot.git
    cd rag-doc-bot
 
+2. **Install Dependencies**:
+
+    ```bash
+    pip install -r requirements.txt
+  ✅ If you're using CUDA, make sure to install PyTorch with GPU support
+
+3. **Download the model outside docker if using docker, in local also create models/all-MiniLM-L6-v2/ folder in app directory**:
+   To keep the Docker image lightweight, the Hugging Face model is not included in the image and not in repo.
+   Manually download the all-MiniLM-L6-v2 model and place it inside:
+    
+
+## Running the Application
+
+1. From the app folder run python main.py to start the application locally on port 8000
+2. To start streamlit UI, open another terminal and run: streamlit run .\streamlit_app.py
+It will start the streamlit UI as below, where you can ask questions.
 
 <img width="587" alt="image" src="https://github.com/user-attachments/assets/7d12c6b5-4ed3-44f8-b4c6-3b70d5c6216d" />
+
+ 
+
+## 🚢 Docker
+
+### 🛠️ Build the Image
+
+    ```bash
+    docker-compose build
+
+### ▶️ Start the App
+
+    ```bash
+    docker-compose up
+
+
+> ⚠️ **Note**  
+> 
+> - The Hugging Face model (`all-MiniLM-L6-v2`) should be **downloaded manually and mounted locally** into the container.  
+> - The `app/chroma_db` directory is **created at runtime** and is **not included** in the Docker image to keep it lightweight.
+  
+
+## Testing
+
+Run automated tests using **pytest**:
+
+pytest app/tests
+
+### Tests include:
+
+- ✅ **Valid and invalid API requests**
+- 🚨 **Internal error handling**
+- 📄 **Response content validation**
+
+## Caching System
+
+This app uses an **in-memory cache** (via [`cachetools`](https://pypi.org/project/cachetools/)) to store previously answered questions.
+
+### Key Benefits
+
+- 🧠 **Caches only successfully answered questions**
+- ⚡ **Speeds up repeat queries significantly**
+- 🔒 **Thread-safe and memory-efficient**
+
 
 
 ## License
