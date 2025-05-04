@@ -68,7 +68,7 @@
     pip install -r requirements.txt
   ✅ If you're using CUDA, make sure to install PyTorch with GPU support
 
-3. **📁 Create the `models/all-MiniLM-L6-v2/` folder manually inside the `app/` directory if it doesn't already exist.**
+3. **Create the `models/all-MiniLM-L6-v2/` folder manually inside the `app/` directory if it doesn't already exist.**
 
 You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model and place it in the following directory:
 
@@ -89,14 +89,14 @@ It will start the streamlit UI as below, where you can ask questions.
 
  
 
-## 🚢 Docker
+## Docker
 
-### 🛠️ Build the Image
+### Build the Image
 
     ```bash
     docker-compose build
 
-### ▶️ Start the App
+### Start the App
 
     ```bash
     docker-compose up
