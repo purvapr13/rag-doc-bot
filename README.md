@@ -53,6 +53,7 @@
 - Docker (optional for containerization)
 - CUDA-enabled GPU (optional for Hugging Face model acceleration)
 
+##Installation
 ### Local Installation
 
 1. **Clone the repository**:
