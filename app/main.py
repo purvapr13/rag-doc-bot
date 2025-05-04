@@ -15,9 +15,8 @@ app = FastAPI()
 
 # Resolve paths for the Chroma DB and models from the app directory
 current_dir = os.path.dirname((os.path.abspath(__file__)))
-print(current_dir)
-model_path = os.path.join(current_dir, "app", "models", "all-MiniLM-L6-v2")
-chroma_db_path = os.path.join(current_dir, "app", "chroma_db")
+model_path = os.path.join(current_dir, "models", "all-MiniLM-L6-v2")
+chroma_db_path = os.path.join(current_dir, "chroma_db")
 
 # Initialize the vector store and QA system
 vector_store = ChromaVectorStore(persist_directory=chroma_db_path, local_model_path=model_path)
