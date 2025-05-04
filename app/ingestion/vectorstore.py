@@ -1,3 +1,4 @@
+import torch
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import Document
@@ -7,13 +8,16 @@ import logging
 configure_logging()
 logger = logging.getLogger(__name__)
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 
 class ChromaVectorStore:
     def __init__(self, persist_directory="../chroma_db", local_model_path="../models/all-MiniLM-L6-v2"):
         self.persist_directory = persist_directory
 
-        logger.debug('Initialize embedding model')
-        self.embedding_function = HuggingFaceEmbeddings(model_name=local_model_path)
+        logger.info(f"Loading embeddings model on device: {device}")
+        self.embedding_function = HuggingFaceEmbeddings(model_name=local_model_path,
+                                                        model_kwargs={"device": device})
 
         logger.debug('Create or loading Chroma DB')
         self.db = Chroma(

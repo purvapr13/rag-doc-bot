@@ -5,8 +5,8 @@ from pydantic import BaseModel
 import os
 
 # Import custom logger and other components
-from app.utils.logger import configure_logging
-from app.retrieval import LangChainRetrievalQA, ChromaVectorStore
+from utils.logger import configure_logging
+from retrieval import LangChainRetrievalQA, ChromaVectorStore
 
 configure_logging()
 logger = logging.getLogger(__name__)

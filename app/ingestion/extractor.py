@@ -56,3 +56,4 @@ def extract_text(file_path):
         logger.error('given file format not supported')
         raise ValueError(f"Unsupported file format: {ext}")
 
+
