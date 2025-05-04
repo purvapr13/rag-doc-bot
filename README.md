@@ -67,3 +67,18 @@
 
 <img width="587" alt="image" src="https://github.com/user-attachments/assets/7d12c6b5-4ed3-44f8-b4c6-3b70d5c6216d" />
 
+
+## License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more information.
+
+---
+
+## Acknowledgements
+
+- [**Hugging Face**](https://huggingface.co/) for transformer models  
+- [**LangChain**](https://www.langchain.com/) for simplifying retrieval pipelines  
+- [**Chroma**](https://www.trychroma.com/) as the vector database  
+- [**Ollama**](https://ollama.ai/) for local language model integration  
+
+
