@@ -1,5 +1,6 @@
 # RAG-Doc-Bot: A Retrieval-Augmented Generation Document Bot
 
+## About
 **RAG-Doc-Bot** is an intelligent document retrieval and question-answering system built using **FastAPI**, **LangChain**, **ChromaDB**, and **Hugging Face** embeddings. It allows you to extract, store, and search document content efficiently to generate precise answers based on the context of the documents.
 
 ---
@@ -23,8 +24,6 @@
 - [License](#license)
 
 ---
-
-## About
 
 **RAG-Doc-Bot** is designed to help organizations and individuals retrieve answers from a collection of documents using advanced document search and AI-based question answering. Using **ChromaDB** as a vector store and **Hugging Face's MiniLM model**, the bot performs efficient text search and integrates external knowledge sources (using models like **Ollama**) to provide accurate and contextual answers.
 
