@@ -126,12 +126,14 @@ Follow the steps below to install and run the Mistral model locally:
 
 You can now use this API endpoint to send prompts and receive generated text from the Mistral model.
 
-
-1. From the app folder run python main.py to start the application locally on port 8000:
+1. In the app/data directory, store your knowledge base data such as pdfs here.
+2. Pass the file_path of the pdf file in the processing.py file to generate embeddings and store vector in the ChromaDb vectorstore for further usage.
+3. Now, you will find chromadb persistant storage folder will be created in the app directory. Chunks will be stored in it.
+4. From the app folder run python main.py to start the application locally on port 8000:
      ```bash
         python main.py
 
-2. To start streamlit UI, open another terminal and run: 
+5. To start streamlit UI, open another terminal and run: 
      ```bash
       streamlit run .\streamlit_app.py
 It will start the streamlit UI as below, where you can ask questions.
