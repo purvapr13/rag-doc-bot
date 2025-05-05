@@ -88,8 +88,6 @@ You can also download the `all-MiniLM-L6-v2` model programmatically using Python
      ```bash
      model.save('./models/all-MiniLM-L6-V2')
 
-
-
 ## Usage
 ## Running the Application
 
