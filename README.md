@@ -76,6 +76,42 @@ You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/se
 ## Usage
 ## Running the Application
 
+## Using Mistral from Ollama for Text Generation
+
+We are using the **Mistral model** via **[Ollama](https://ollama.com/)** to generate text based on a given context and prompt.
+
+---
+
+### ⚙️ Setup Instructions for Windows
+
+Follow the steps below to install and run the Mistral model locally:
+
+1. **Download and Install Ollama**
+   - Visit: [https://ollama.com/download](https://ollama.com/download)
+   - Download the installer and complete the installation.
+
+2. **Download the Mistral Model**
+   - Open Command Prompt and run:
+     ```bash
+     ollama pull mistral
+     ```
+   - This will download the **Mistral 7B** model to your local system.
+
+3. **Start the Ollama Server**
+   - Run the following command to serve the model:
+     ```bash
+     ollama serve
+     ```
+   - The Mistral model will now be available locally at:
+     ```
+     http://localhost:11434/api/generate
+     ```
+
+---
+
+You can now use this API endpoint to send prompts and receive generated text from the Mistral model.
+
+
 1. From the app folder run python main.py to start the application locally on port 8000:
      ```bash
         python main.py
