@@ -121,7 +121,6 @@ You can now use this API endpoint to send prompts and receive generated text fro
       streamlit run .\streamlit_app.py
 It will start the streamlit UI as below, where you can ask questions.
 
-![image](https://github.com/user-attachments/assets/b9c3a00c-9a75-4c70-8656-c5baea9d2504)
 
 
 <img width="587" alt="image" src="https://github.com/user-attachments/assets/7d12c6b5-4ed3-44f8-b4c6-3b70d5c6216d" />
