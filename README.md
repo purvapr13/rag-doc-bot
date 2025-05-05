@@ -72,6 +72,23 @@
 
 You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model and place it in the following directory:
 
+You can also download the `all-MiniLM-L6-v2` model programmatically using Python and the `sentence-transformers` library.
+
+**🛠️ Steps**
+
+1. **Install the Required Library**
+   ```bash
+   pip install -U sentence-transformers
+
+2. **Download the model using code as below**
+     ```bash
+     model = SentenceTransformer('sentence-transformers/allMiniLML6-v2')
+
+3. **Save the model locally**
+     ```bash
+     model.save('./models/all-MiniLM-L6-V2')
+
+
 
 ## Usage
 ## Running the Application
