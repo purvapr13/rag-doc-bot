@@ -76,13 +76,13 @@ You need to manually download the [`all-MiniLM-L6-v2`](https://huggingface.co/se
 ## Usage
 ## Running the Application
 
-## Using Mistral from Ollama for Text Generation
+**Using Mistral from Ollama for Text Generation**
 
 We are using the **Mistral model** via **[Ollama](https://ollama.com/)** to generate text based on a given context and prompt.
 
 ---
 
-### ⚙️ Setup Instructions for Windows
+**⚙️ Setup Instructions for Windows**
 
 Follow the steps below to install and run the Mistral model locally:
 
