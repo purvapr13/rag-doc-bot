@@ -7,7 +7,7 @@ configure_logging()
 logger = logging.getLogger(__name__)
 
 
-def preprocess_and_chunk(documents, chunk_size=500, chunk_overlap=100):
+def preprocess_and_chunk(documents, chunk_size=900, chunk_overlap=100):
     logger.debug('Extract raw text from Document objects')
     all_text = [doc.page_content for doc in documents if doc.page_content.strip()]
 
