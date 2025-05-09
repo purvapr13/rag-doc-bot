@@ -4,6 +4,8 @@ import requests
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from utils.logger import configure_logging
+from langchain.memory import ConversationBufferMemory
+from langchain.schema import HumanMessage, AIMessage
 from utils.cache import get_cached_answer, store_answer_in_cache
 
 configure_logging()
@@ -74,27 +76,59 @@ class LangChainRetrievalQA:
         self.vector_store = vector_store
         self.ollama_answer_generator = OllamaAnswerGenerator(model_name=model_name, base_url=base_url)
 
+        # Initialize ConversationBufferMemory with a memory key and the ability to return messages
+        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+
     def _create_retriever(self):
         return self.vector_store.as_retriever()
 
     def _generate_answer(self, context: str, question: str) -> str:
         return self.ollama_answer_generator.generate(context=context, question=question)
 
+    def _build_context_with_history(self, question: str, documents) -> str:
+        # Get the current conversation history (user and bot messages)
+        chat_history = self.memory.load_memory_variables({})["chat_history"]
+
+        # Combine the conversation history (user + bot) into a single string
+        history_text = ""
+        for msg in chat_history:
+            if isinstance(msg, HumanMessage):
+                history_text += f"User: {msg.content}\n"
+            elif isinstance(msg, AIMessage):
+                history_text += f"Bot: {msg.content}\n"
+
+        # Combine the document context with the conversation history
+        document_context = "\n\n".join([doc.page_content for doc in documents])
+        full_context = f"{history_text}\nContext:\n{document_context}\n"
+
+        return full_context.strip()
+
     def get_answer(self, question: str) -> str:
+        # Check if the question is cached
         cached_answer = get_cached_answer(question)
         if cached_answer:
             logger.info(f"Cache hit for question: {question}")
             return cached_answer
 
+        # Retrieve relevant documents for the question
         retriever = self._create_retriever()
         documents = retriever.invoke(question)
 
         if not documents:
             logger.warning("No relevant documents found for the question.")
-            return "⚠️ Sorry, I couldn't find relevant information in the documents."
+            return ("⚠️ Sorry, I couldn't find relevant information in the documents."
+                    " Please try asking in a different way or clarify your question.")
 
-        context = "\n\n".join([doc.page_content for doc in documents])
-        answer = self._generate_answer(context=context, question=question)
+        # Build the context using history and document-based content
+        full_context = self._build_context_with_history(question, documents)
+
+        # Generate the answer based on the full context
+        answer = self._generate_answer(context=full_context, question=question)
+
+        # Update memory with the latest user query and bot answer
+        self.memory.save_context({"input": question}, {"output": answer})
+
+        # Optionally cache the answer for future queries
         store_answer_in_cache(question, answer)
         return answer
 

@@ -27,6 +27,11 @@ class ChromaVectorStore:
         )
 
     def add_documents(self, documents: list[Document]):
+        if not documents:
+            logger.warning("No documents to add to Chroma DB.")
+            return
+
+        logger.info(f"Adding {len(documents)} documents to Chroma DB")
         self.db.add_documents(documents)
 
     def similarity_search(self, query, k=5):

@@ -32,13 +32,15 @@ class QuestionRequest(BaseModel):
 @app.post("/predict")
 async def predict(request: QuestionRequest = Body(...)):
     try:
-        question = request.ques
+        question = request.ques.strip()
+        if not question:
+            return {"error": "Question cannot be empty."}
         logger.info(f"Received question: {question}")
         answer = qa_system.get_answer(question)
         return {"question": question, "answer": answer}
     except Exception as e:
         logger.error(f"Error: {str(e)}")
-        return {"error": "Unable to process your request."}
+        return {"error": f"Processing error: {str(e)}"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -36,7 +36,7 @@ if user_input:
         answer = response.json().get("answer", "⚠️ No answer received.")
     except Exception as e:
         logger.error(f"API error: {e}")
-        answer = f"❌ Error: {e}"
+        answer = f"⏳ The model is taking too long to respond. Please try again."
 
     # Show bot answer
     st.session_state.messages.append({"role": "assistant", "content": answer})
